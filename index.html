@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Jedan izborni dan iz četiri ugla: člana biračkog odbora, posmatrača, mobilnog tima i glasača. Izaberi ulogu i odluči šta bi ti uradio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://izborni-dan.netlify.app/">
+<meta property="og:locale" content="sr_RS">
+<meta property="og:site_name" content="Izborni dan">
+<meta property="og:title" content="Izborni dan – četiri uloge, isti cilj">
+<meta property="og:description" content="Jedan izborni dan iz četiri ugla: člana biračkog odbora, posmatrača, mobilnog tima i glasača. Izaberi ulogu i odluči šta bi ti uradio.">
+<meta property="og:image" content="https://izborni-dan.netlify.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Izborni dan: četiri igre o izborima, Kontrolor, Posmatrač, Mobilni tim i Glasač">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Izborni dan – četiri uloge, isti cilj">
+<meta name="twitter:description" content="Jedan izborni dan iz četiri ugla: člana biračkog odbora, posmatrača, mobilnog tima i glasača. Izaberi ulogu i odluči šta bi ti uradio.">
+<meta name="twitter:image" content="https://izborni-dan.netlify.app/og-image.png">
+<meta name="version" content="1.0.0">
+<title>Izborni dan</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231A1D22'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23C24A6E'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%235664D6'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%2320A39A'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%23A65AAB'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: kratak uvod, pa četiri kartice igara u mreži 2x2 (jedna kolona na telefonu); slika kartice je slika za deljenje igre */
+:root {
+  --bg: #EDEFF1;
+  --sheet: #FBFCFC;
+  --ink: #1A1D22;
+  --muted: #5C636D;
+  --rule: #CDD2D8;
+  --c-glasac: #7A1F3D;
+  --c-kontrolor: #2C3A94;
+  --c-posmatrac: #0E6461;
+  --c-mobilni: #6A2C6E;
+  --font-display: "Bitter", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --sheet: #191C21; --ink: #E6E9ED; --muted: #9AA2AD; --rule: #2E333B;
+    --c-glasac: #F0A0B8; --c-kontrolor: #97A3FF; --c-posmatrac: #5CC9C1; --c-mobilni: #D99BDD;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --sheet: #191C21; --ink: #E6E9ED; --muted: #9AA2AD; --rule: #2E333B;
+  --c-glasac: #F0A0B8; --c-kontrolor: #97A3FF; --c-posmatrac: #5CC9C1; --c-mobilni: #D99BDD;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.55;
+  padding-inline: 16px; padding-block: 32px 56px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 32px; }
+
+.intro { display: grid; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 24px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(40px, 8vw, 72px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.lead { font-size: 20px; max-width: 52ch; margin: 0; }
+
+.games { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; }
+.game { min-width: 0; }
+.game a {
+  display: grid; gap: 14px; height: 100%;
+  background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 14px 20px;
+  color: inherit; text-decoration: none;
+  transition: border-color .2s, transform .2s;
+}
+.game a:hover { border-color: var(--accent); transform: translateY(-2px); }
+.game a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.game img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; max-width: 100%; border-radius: 3px; }
+.game .body { display: grid; gap: 6px; padding-inline: 6px; }
+.role { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.game h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.15; margin: 0; }
+.game p { margin: 0; color: var(--ink); }
+.facts { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.facts span { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts b { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--accent); }
+.g-glasac { --accent: var(--c-glasac); }
+.g-kontrolor { --accent: var(--c-kontrolor); }
+.g-posmatrac { --accent: var(--c-posmatrac); }
+.g-mobilni { --accent: var(--c-mobilni); }
+
+.foot { font-size: 14px; color: var(--muted); max-width: 70ch; margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .game a { transition: none; }
+  .game a:hover { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="intro">
+    <div class="eyebrow">Edukativne igre o izborima u Srbiji</div>
+    <h1>Izborni dan</h1>
+    <p class="lead">Jedan izborni dan iz četiri ugla. Izaberi ulogu, reši situacije sa biračkog mesta i saznaj šta je po pravilima ispravno, a šta nije.</p>
+  </header>
+
+  <main>
+    <ul class="games">
+      <li class="game g-kontrolor">
+        <a href="https://kontrolor.netlify.app/">
+          <img src="igre/kontrolor.png" width="1200" height="630" alt="">
+          <div class="body">
+            <div class="role">Uloga: član biračkog odbora</div>
+            <h2>Kontrolor</h2>
+            <p>Član si biračkog odbora na dan izbora. Kroz 21 situaciju, od primopredaje materijala do zapisnika, odluči šta je ispravno i saznaj zašto.</p>
+            <div class="facts"><span>21 situacija · oko 10 minuta</span><b>Igraj →</b></div>
+          </div>
+        </a>
+      </li>
+      <li class="game g-posmatrac">
+        <a href="https://posmatrac.netlify.app/">
+          <img src="igre/posmatrac.png" width="1200" height="630" alt="">
+          <div class="body">
+            <div class="role">Uloga: posmatrač</div>
+            <h2>Posmatrač</h2>
+            <p>Akreditovani si posmatrač na biračkom mestu. Kroz 21 situaciju, od pripreme do izveštaja, odluči kada i kako da postupiš.</p>
+            <div class="facts"><span>21 situacija · oko 10 minuta</span><b>Igraj →</b></div>
+          </div>
+        </a>
+      </li>
+      <li class="game g-mobilni">
+        <a href="https://mobilni-tim.netlify.app/">
+          <img src="igre/mobilni-tim.png" width="1200" height="630" alt="">
+          <div class="body">
+            <div class="role">Uloga: mobilni tim posmatrača</div>
+            <h2>Mobilni tim</h2>
+            <p>Sa kolegom obilaziš devet biračkih mesta. Kroz 21 situaciju, od plana obilaska do izveštaja, odluči šta da proveriš, zabeležiš i javiš.</p>
+            <div class="facts"><span>21 situacija · oko 10 minuta</span><b>Igraj →</b></div>
+          </div>
+        </a>
+      </li>
+      <li class="game g-glasac">
+        <a href="https://glasac.netlify.app/">
+          <img src="igre/glasac.png" width="1200" height="630" alt="">
+          <div class="body">
+            <div class="role">Uloga: glasač</div>
+            <h2>Glasač</h2>
+            <p>Od provere biračkog spiska do prigovora posle izbora. Kroz 20 situacija odluči kako da sačuvaš svoj glas od pritiska, ucene i prevare.</p>
+            <div class="facts"><span>20 situacija · oko 10 minuta</span><b>Igraj →</b></div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <p class="foot">Edukativne simulacije sa izmišljenim mestima i situacijama. Pravila su pojednostavljena prema Zakonu o izboru narodnih poslanika, uputstvima Republičke izborne komisije i uobičajenim pravilima organizacija koje posmatraju izbore. Nisu pravni savet. Na stvarnim izborima drži se zakona, uputstava i obuke za te izbore.</p>
+</div>
+
+</body>
+</html>
