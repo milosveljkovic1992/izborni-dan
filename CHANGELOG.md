@@ -4,6 +4,9 @@ Sve značajne izmene krovne stranice Izborni dan beleže se u ovom fajlu. Brojev
 
 ## [Neobjavljeno]
 
+### Promenjeno
+- Širi glasački listić na slici kartice Kontrolora i na pločici Kontrolora na slici za deljenje (`og-image.png`).
+
 ## [1.0.0] - 2026-10-13
 
 ### Dodato
