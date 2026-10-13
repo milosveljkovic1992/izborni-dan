@@ -5,6 +5,7 @@ Sve značajne izmene krovne stranice Izborni dan beleže se u ovom fajlu. Brojev
 ## [Neobjavljeno]
 
 ### Promenjeno
+- Raspored boja u ikonici u tabu prati redosled kartica: gore Kontrolor i Posmatrač, dole Mobilni tim i Glasač.
 - Širi glasački listić na slici kartice Kontrolora i na pločici Kontrolora na slici za deljenje (`og-image.png`).
 
 ## [1.0.0] - 2026-10-13
